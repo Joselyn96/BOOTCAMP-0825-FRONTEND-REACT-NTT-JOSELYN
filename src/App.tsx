@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState} from 'react'
 import "./App.css"
 // import MyAppStyled from './App.styled'
 import Navbar from './components/layout/Navbar'
@@ -9,17 +9,12 @@ import Categories from './components/layout/Categories'
 import Carousel from './components/layout/Carousel'
 import Newsletter from './components/layout/Newsletter'
 
-function App() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+//hooks
+import { useScroll } from './hooks/useScroll'
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+function App() {
+  const isScrolled = useScroll(50)
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen)
