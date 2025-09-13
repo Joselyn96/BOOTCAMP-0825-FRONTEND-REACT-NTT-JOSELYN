@@ -8,6 +8,7 @@ import Benefits from './components/layout/Benefits'
 import Categories from './components/layout/Categories'
 import Carousel from './components/layout/Carousel'
 import Newsletter from './components/layout/Newsletter'
+import Testimonial from './components/layout/Testimonial'
 
 //hooks
 import { useScroll } from './hooks/useScroll'
@@ -35,6 +36,7 @@ function App() {
       <Categories />
       <Carousel />
       <Newsletter />
+      <Testimonial />
     </div>
     // <>
     //   <h1>pruebas</h1>
