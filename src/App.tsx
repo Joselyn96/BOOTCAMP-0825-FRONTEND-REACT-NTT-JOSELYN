@@ -6,7 +6,7 @@ import Sidebar from './components/layout/Sidebar'
 import Hero from './components/layout/Hero'
 import Benefits from './components/layout/Benefits'
 import Categories from './components/layout/Categories'
-
+import Carousel from './components/layout/Carousel'
 
 function App() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -37,6 +37,7 @@ function App() {
       <Hero />
       <Benefits />
       <Categories />
+      <Carousel />
     </div>
     // <>
     //   <h1>pruebas</h1>
