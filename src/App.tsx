@@ -5,6 +5,7 @@ import Navbar from './components/layout/Navbar'
 import Sidebar from './components/layout/Sidebar'
 import Hero from './components/layout/Hero'
 import Benefits from './components/layout/Benefits'
+import Categories from './components/layout/Categories'
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
       <Navbar isScrolled={isScrolled} onToggleSidebar={toggleSidebar} />
       <Hero />
       <Benefits />
+      <Categories />
     </div>
     // <>
     //   <h1>pruebas</h1>
