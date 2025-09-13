@@ -3,6 +3,7 @@ import "./App.css"
 // import MyAppStyled from './App.styled'
 import Navbar from './components/layout/Navbar'
 import Sidebar from './components/layout/Sidebar'
+import Hero from './components/layout/Hero'
 
 
 function App() {
@@ -31,7 +32,7 @@ function App() {
       {isSidebarOpen && <div className="sidebar-overlay" onClick={closeSidebar} />}
       <Sidebar isOpen={isSidebarOpen} onClose={closeSidebar} />
       <Navbar isScrolled={isScrolled} onToggleSidebar={toggleSidebar} />
-      
+      <Hero />
     </div>
     // <>
     //   <h1>pruebas</h1>
