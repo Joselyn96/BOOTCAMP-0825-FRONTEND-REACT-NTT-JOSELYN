@@ -4,6 +4,7 @@ import "./App.css"
 import Navbar from './components/layout/Navbar'
 import Sidebar from './components/layout/Sidebar'
 import Hero from './components/layout/Hero'
+import Benefits from './components/layout/Benefits'
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
       <Sidebar isOpen={isSidebarOpen} onClose={closeSidebar} />
       <Navbar isScrolled={isScrolled} onToggleSidebar={toggleSidebar} />
       <Hero />
+      <Benefits />
     </div>
     // <>
     //   <h1>pruebas</h1>
