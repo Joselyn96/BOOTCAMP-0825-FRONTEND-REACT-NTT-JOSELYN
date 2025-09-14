@@ -1,20 +1,30 @@
 import { useState } from "react"
 import LoginStyled from "./Login.styled"
+// import LoadingSpinner from "../ui/LoadingSpinner"
 
-const Login = () => {
-  const [email, setEmail] = useState("")
+
+interface LoginProps {
+  onSubmit: (credentials: { username: string; password: string }) => void
+  onBackToHome: () => void
+  isLoading: boolean
+  error?: string
+}
+
+const Login = ({ onSubmit, onBackToHome, isLoading, error }: LoginProps) => {
+  const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
+  // const [isLoading, setIsLoading] = useState(false)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log("Login attempt:", { email, password })
-  }
-
-  const handleBackToHome = () => {
     
-    window.location.href = "/"
-    
+    if (!username || !password) {
+      alert("Please complete all fields")
+      return
+    }
+    onSubmit({ username, password })
+  
   }
 
   return (
@@ -29,20 +39,22 @@ const Login = () => {
         
         <LoginStyled.FormSection>
           <LoginStyled.Card>
-            <LoginStyled.BackButton onClick={handleBackToHome}>
+            <LoginStyled.BackButton onClick={onBackToHome}>
               ← Back to Home
             </LoginStyled.BackButton>
             <LoginStyled.Title>Log in to shop</LoginStyled.Title>
                     
             <LoginStyled.Form onSubmit={handleSubmit}>
               <LoginStyled.InputGroup>
-                <LoginStyled.Label>Email address</LoginStyled.Label>
+                <LoginStyled.Label>Username</LoginStyled.Label>
                 <LoginStyled.Input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="your@email.com"
+                  type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="your_username"
                   required
+                  // revisar este isloading
+                  disabled={isLoading}
                 />
               </LoginStyled.InputGroup>
 
@@ -55,10 +67,12 @@ const Login = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Your password"
                     required
+                    disabled={isLoading}
                   />
                   <LoginStyled.PasswordToggle
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
+                    disabled={isLoading}
                   >
                     <span className="material-symbols-outlined">
                       {showPassword ? "visibility_off" : "visibility"}
@@ -70,8 +84,15 @@ const Login = () => {
                   forgot password?
                 </LoginStyled.ForgotPasswordLink>
               </LoginStyled.InputGroup>
-              <LoginStyled.LoginButton type="submit">
-                Log In
+              {/* revisar */}
+              {error && (
+                <div style={{ color: 'red', marginBottom: '1rem', textAlign: 'center' }}>
+                  {error}
+                </div>
+              )}
+              {/* revisar */}
+              <LoginStyled.LoginButton type="submit" disabled={isLoading}>
+              Log In
               </LoginStyled.LoginButton>
             </LoginStyled.Form>
 
