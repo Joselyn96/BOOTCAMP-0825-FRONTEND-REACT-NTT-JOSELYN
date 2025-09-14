@@ -48,18 +48,36 @@ const CarouselWrapper = styled.div`
   position: relative;
   overflow: hidden;
   border-radius: 1rem;
+  @media (max-width: 639px) {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    
+    /* ocultar scrollbar */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
 `
 
 const CarouselTrack = styled.div<{ $currentIndex: number }>`
   display: flex;
   transition: transform 0.3s ease;
   transform: translateX(-${props => props.$currentIndex * 100}%);
+  @media (max-width: 639px) {
+    transform: none;
 `
 
 const CarouselSlide = styled.div`
   min-width: 100%;
   position: relative;
   height: 400px;
+
+    @media (max-width: 639px) {
+    scroll-snap-align: start;
+  }
 
   @media (min-width: 640px) {
     height: 500px;
@@ -111,8 +129,8 @@ const NavButton = styled.button<{ $direction: 'prev' | 'next' }>`
   background-color: rgba(255, 255, 255, 0.9);
   border: none;
   border-radius: 50%;
-  width: 3rem;
-  height: 3rem;
+  width: 2rem;
+  height: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -126,6 +144,11 @@ const NavButton = styled.button<{ $direction: 'prev' | 'next' }>`
     background-color: white;
     transform: translateY(-50%) scale(1.1);
   }
+
+  @media (max-width: 639px) {
+    display: none;
+  }
+
 `
 
 const Indicators = styled.div`

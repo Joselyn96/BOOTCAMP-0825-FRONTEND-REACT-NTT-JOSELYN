@@ -1,7 +1,6 @@
 import CategoriesStyled from './Categories.styled'
 
-const Categories = () => {
-  const categories = [
+const categories = [
     {
       name: "Smartphones",
       image: "/smartphones.png",
@@ -34,6 +33,8 @@ const Categories = () => {
     },
   ]
 
+const Categories = () => {
+
   return (
     <CategoriesStyled.Container>
       <CategoriesStyled.ContainerInner>
@@ -44,8 +45,8 @@ const Categories = () => {
           </CategoriesStyled.Subtitle>
         </CategoriesStyled.Header>
         <CategoriesStyled.Grid>
-          {categories.map((category, index) => (
-            <CategoriesStyled.Item key={index}>
+          {categories.map((category) => (
+            <CategoriesStyled.Item key={category.name}>
               <CategoriesStyled.ImageWrapper>
                 <CategoriesStyled.Image 
                   src={category.image || "/placeholder.svg"} 

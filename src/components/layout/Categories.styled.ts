@@ -1,5 +1,8 @@
 import styled from 'styled-components'
 
+const DURATION = '180ms';
+const EASE = 'cubic-bezier(0.22, 1, 0.36, 1)';
+
 const Container = styled.section`
   padding: 3rem 0;
 
@@ -73,29 +76,6 @@ const Grid = styled.div`
   }
 `
 // box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-const Item = styled.div`
-  text-align: center;
-  cursor: pointer;
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  
-
-  &:hover {
-    transform: translateY(-12px) rotateY(5deg);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
-  }
-
-  &:hover .category-image-wrapper {
-    border-color: var(--primary-color);
-  }
-
-  &:hover .category-image {
-    transform: scale(1.1);
-  }
-
-  &:hover .category-name {
-    color: var(--primary-color);
-  }
-`
 
 const ImageWrapper = styled.div`
   position: relative;
@@ -106,6 +86,9 @@ const ImageWrapper = styled.div`
   overflow: hidden;
   transition: border-color 0.3s ease;
 
+  border: 2px solid transparent;
+  transition: border-color ${DURATION} ${EASE};
+
   @media (min-width: 640px) {
     width: 6rem;
     height: 6rem;
@@ -113,11 +96,16 @@ const ImageWrapper = styled.div`
   }
 `
 
-const Image = styled.img`
+const Image = styled.img.attrs({
+  loading: 'lazy',
+  decoding: 'async',
+})`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
+  transform: translateZ(0);
+  will-change: transform;
+  transition: transform ${DURATION} ${EASE};
 `
 
 const Name = styled.h3`
@@ -125,10 +113,31 @@ const Name = styled.h3`
   font-weight: 600;
   margin-bottom: 0.25rem;
   color: var(--text-primary);
-  transition: color 0.3s ease;
+  transition: color ${DURATION} ${EASE};
 
   @media (min-width: 640px) {
     font-size: 1.125rem;
+  }
+`
+const Item = styled.div`
+  text-align: center;
+  cursor: pointer;
+  will-change: transform;
+  transition: transform ${DURATION} ${EASE};
+
+  &:hover {
+    transform: translate3d(0, -6px, 0) scale(1.04);
+  }
+
+  /* 👇 Hover apuntando a los componentes */
+  &:hover ${ImageWrapper} { 
+  border-color: var(--primary, #16a34a); 
+  }
+  &:hover ${Image} { 
+  transform: translateZ(0) scale(1.06); 
+  }
+  &:hover ${Name} { 
+  color: var(--primary, #16a34a); 
   }
 `
 
