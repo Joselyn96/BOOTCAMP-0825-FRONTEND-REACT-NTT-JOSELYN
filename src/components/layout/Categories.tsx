@@ -4,32 +4,32 @@ const Categories = () => {
   const categories = [
     {
       name: "Smartphones",
-      image: "/modern-smartphone-collection.png",
+      image: "/smartphones.png",
       description: "Últimos modelos y tecnología",
     },
     {
       name: "Laptops",
-      image: "/sleek-laptop-computers.jpg",
+      image: "/laptops.png",
       description: "Potencia y rendimiento",
     },
     {
       name: "Fragances",
-      image: "/luxury-perfume-bottles.jpg",
+      image: "/fragance.png",
       description: "Fragancias exclusivas",
     },
     {
       name: "Skincare",
-      image: "/skincare-products-cosmetics.jpg",
+      image: "/skincare.png",
       description: "Cuidado de la piel",
     },
     {
       name: "Groceries",
-      image: "/fresh-groceries-food-items.jpg",
+      image: "/groceries.png",
       description: "Productos frescos",
     },
     {
       name: "Ropa",
-      image: "/modern-home-decoration-items.jpg",
+      image: "/clothes.png",
       description: "Decoración del hogar",
     },
   ]
