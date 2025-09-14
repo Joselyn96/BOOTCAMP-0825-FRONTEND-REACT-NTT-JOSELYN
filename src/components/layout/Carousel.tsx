@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState} from 'react'
 import CarouselStyled from './Carousel.styled'
 
 const Carousel = () => {
@@ -7,23 +7,23 @@ const Carousel = () => {
   const slides = [
     {
       title: "TECHNOLOGY",
-      image: "/technology-headphones.jpg",
+      image: "/tecnologia.png",
     },
     {
       title: "FASHION",
-      image: "/fashion-woman-style.jpg",
+      image: "/fashion.png",
     },
     {
       title: "BEAUTY",
-      image: "/beauty-cosmetics.jpg",
+      image: "/beauty.png",
     },
     {
       title: "SPORTS",
-      image: "/sports-equipment.jpg",
+      image: "/sports.png",
     },
     {
       title: "HOME",
-      image: "/home-decoration.jpg",
+      image: "/home.png",
     },
   ]
 
@@ -40,10 +40,10 @@ const Carousel = () => {
   }
 
   // Auto-play opcional
-  useEffect(() => {
-    const interval = setInterval(nextSlide, 5000) // Cambia cada 5 segundos
-    return () => clearInterval(interval)
-  }, [])
+  // useEffect(() => {
+  //   const interval = setInterval(nextSlide, 5000) // Cambia cada 5 segundos
+  //   return () => clearInterval(interval)
+  // }, [])
 
   return (
     <CarouselStyled.Container>
