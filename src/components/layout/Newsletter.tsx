@@ -38,12 +38,12 @@ const Newsletter = () => {
           
           <NewsletterStyled.ImageSection>
             <NewsletterStyled.ProductImage 
-              src="/headphones-product.jpg" 
-              alt="Headphones" 
+              src="/productos.png" 
+              alt="grocery products" 
             />
             <NewsletterStyled.ProductImage 
-              src="/grocery-bag-products.jpg" 
-              alt="Grocery products" 
+              src="/persona.png" 
+              alt="person" 
             />
           </NewsletterStyled.ImageSection>
         </NewsletterStyled.Content>

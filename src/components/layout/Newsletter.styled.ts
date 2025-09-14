@@ -134,7 +134,6 @@ const ImageSection = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
 
   @media (min-width: 768px) {
     justify-content: flex-end;
@@ -142,8 +141,9 @@ const ImageSection = styled.div`
 `
 
 const ProductImage = styled.img`
-  width: auto;
-  height: 120px;
+  width: 180px;
+  height: auto;
+  max-width: 100%;
   object-fit: contain;
 
   @media (min-width: 640px) {
@@ -151,7 +151,9 @@ const ProductImage = styled.img`
   }
 
   @media (min-width: 1024px) {
-    height: 180px;
+    height: 200px;
+    width: 300px;
+    
   }
 `
 
