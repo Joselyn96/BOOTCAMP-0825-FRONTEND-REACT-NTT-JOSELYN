@@ -72,14 +72,16 @@ const Grid = styled.div`
     gap: 2rem;
   }
 `
-
+// box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 const Item = styled.div`
   text-align: center;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  
 
   &:hover {
-    transform: translateY(-2px);
+    transform: translateY(-12px) rotateY(5deg);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
   }
 
   &:hover .category-image-wrapper {
