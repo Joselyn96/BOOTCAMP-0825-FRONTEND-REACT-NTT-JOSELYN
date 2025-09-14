@@ -1,15 +1,14 @@
-
 import "./App.css"
-import MyAppStyled from './App.styled'
+import AppRoutes from "./routes/Index"
 
 function App() {
 
-
   return (
-    <>
-      <h1>pruebas</h1>
-      <MyAppStyled.Botoncito>Click me</MyAppStyled.Botoncito>
-    </>
+    // <>
+    //   <h1>pruebas</h1>
+    //   <MyAppStyled.Botoncito>Click me</MyAppStyled.Botoncito>
+    // </>
+    <AppRoutes />
   )
 }
 

@@ -1,4 +1,5 @@
 import NavbarStyled from './Navbar.styled'
+import { NavLink } from 'react-router-dom'
 
 interface NavbarProps {
   isScrolled: boolean
@@ -24,7 +25,7 @@ const Navbar = ({ isScrolled, onToggleSidebar }: NavbarProps) => {
                 <NavbarStyled.Link href="#" $isScrolled={isScrolled} $secondary>Contact</NavbarStyled.Link>
               </NavbarStyled.Nav>
             </NavbarStyled.Links>
-            <NavbarStyled.LoginBtn $isScrolled={isScrolled}>Login</NavbarStyled.LoginBtn>
+            <NavbarStyled.LoginBtn as={NavLink} to="/login" $isScrolled={isScrolled}>Login</NavbarStyled.LoginBtn>
           </NavbarStyled.Right>
         </NavbarStyled.Content>
       </NavbarStyled.ContainerInner>

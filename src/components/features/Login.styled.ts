@@ -1,23 +1,114 @@
 import styled from "styled-components"
 
-// Container de página completa (reemplaza Overlay + Modal)
 const Container = styled.div`
   min-height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
   background-color: #f9fafb;
-  padding: 1rem;
+  position: relative;
 `
 
-// Card del formulario (era Modal)
+const BackButton = styled.button`
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  background: rgba(255, 255, 255);
+  border: none;
+  color: #6b7280;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  z-index: 10;
+
+  animation: breathe 2s ease-in-out infinite;
+
+  &:hover {
+    color: #22c55e;
+    background-color: rgba(255, 255, 255);
+    animation-play-state: paused;
+  }
+
+  @keyframes breathe {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
+
+  @media (max-width: 768px) {
+    top: 1rem;
+    left: 1rem;
+    font-size: 0.875rem;
+    animation: none;
+  }
+`
+
+
+const MainContent = styled.div`
+  flex: 1;
+  display: flex;
+  min-height: 100vh;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+`
+
+// Sección de la imagen
+const ImageSection = styled.div`
+  flex: 1;
+  background: linear-gradient(135deg, #85c4a4ff 0%, #22c55e 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+
+  @media (max-width: 768px) {
+    display: none; // La imagen desaparece en móvil
+  }
+`
+
+const Image = styled.img`
+  width: 100%;
+  height: 100%;
+  max-width: 500px;
+  max-height: 600px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+`
+
+// sección del formulario
+const FormSection = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+
+  @media (max-width: 768px) {
+    flex: none;
+    min-height: 100vh;
+    padding: 1rem;
+  }
+`
+
 const Card = styled.div`
   background: white;
   border-radius: 12px;
   padding: 2rem;
-  width: 90%;
+  width: 100%;
   max-width: 400px;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+    max-width: none;
+  }
 `
 
 const Title = styled.h2`
@@ -58,10 +149,11 @@ const Input = styled.input`
   font-size: 1rem;
   background-color: white;
   transition: border-color 0.2s ease;
+  box-sizing: border-box;
 
   &:focus {
     outline: none;
-    border-color: #3b82f6;
+    border-color: #16a34a;
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
   }
 
@@ -80,6 +172,7 @@ const PasswordToggle = styled.button`
   cursor: pointer;
   color: #6b7280;
   padding: 0.25rem;
+  font-size: 1.125rem;
 
   &:hover {
     color: #374151;
@@ -88,7 +181,7 @@ const PasswordToggle = styled.button`
 
 const ForgotPasswordLink = styled.a`
   font-size: 0.875rem;
-  color: #3b82f6;
+  color: #16a34a;
   text-decoration: none;
   align-self: flex-end;
   margin-top: -0.5rem;
@@ -108,7 +201,7 @@ const HelpText = styled.p`
 const LoginButton = styled.button`
   width: 100%;
   padding: 0.875rem;
-  background-color: #3b82f6;
+  background-color: #22c55e;
   color: white;
   border: none;
   border-radius: 6px;
@@ -119,11 +212,11 @@ const LoginButton = styled.button`
   margin-top: 1rem;
 
   &:hover {
-    background-color: #2563eb;
+    background-color: #16a34a;
   }
 
   &:active {
-    background-color: #1d4ed8;
+    background-color: #16a34a;
   }
 `
 
@@ -132,11 +225,11 @@ const LinkText = styled.p`
   margin-top: 1.5rem;
   font-size: 0.875rem;
   color: #6b7280;
-  
-  a {
-    color: #3b82f6;
-    text-decoration: none;
     
+  a {
+    color: #16a34a;
+    text-decoration: none;
+        
     &:hover {
       text-decoration: underline;
     }
@@ -145,6 +238,11 @@ const LinkText = styled.p`
 
 const LoginStyled = {
   Container,
+  BackButton,
+  MainContent,
+  ImageSection,
+  Image,
+  FormSection,
   Card,
   Title,
   Form,
