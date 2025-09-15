@@ -4,6 +4,8 @@ import LoginPage from '../pages/Login'
 import ProductosPage from '../pages/Products'
 import ProtectedRoute from './ProtectedRoute'
 import { ProductsProvider } from '../contexts/ProductsContext'
+import Profile from '../pages/Profile'
+
 
 const AppRoutes = () => {
   return (
@@ -13,6 +15,12 @@ const AppRoutes = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/products" element={<ProtectedRoute><ProductosPage /></ProtectedRoute>} />
+        <Route 
+            path="/profile" 
+            element={
+                <Profile />
+            } 
+          />
       </Routes>
       </ProductsProvider>
     </BrowserRouter>

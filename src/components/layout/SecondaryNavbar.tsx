@@ -28,7 +28,7 @@ const SecondaryNavbar = ({
         navigate('')
         break
       case 'profile':
-        navigate('')
+        navigate('/profile')
         break
       default:
         break
