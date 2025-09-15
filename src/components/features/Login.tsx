@@ -1,32 +1,32 @@
 import { useState } from "react"
+import { useForm } from "react-hook-form"
 import LoginStyled from "./Login.styled"
 // import LoadingSpinner from "../ui/LoadingSpinner"
 
+// tipo para los datos del formulario
+interface LoginFormData {
+  username: string
+  password: string
+}
 
 interface LoginProps {
-  onSubmit: (credentials: { username: string; password: string }) => void
+  onSubmit: (credentials: LoginFormData) => void
   onBackToHome: () => void
   isLoading: boolean
   error?: string
 }
 
 const Login = ({ onSubmit, onBackToHome, isLoading, error }: LoginProps) => {
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
-  // const [isLoading, setIsLoading] = useState(false)
+// react-hook-form
+  const { register, handleSubmit, formState: { errors } } = useForm<LoginFormData>()
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    
-    if (!username || !password) {
-      alert("Please complete all fields")
-      return
-    }
-    onSubmit({ username, password })
-  
+// funcion del submit del formulario
+  const onSubmitHandler = (data: LoginFormData) => {
+    console.log("Form Data:", data)
+    onSubmit(data)
   }
-
+  
   return (
     <LoginStyled.Container>
       <LoginStyled.MainContent>
@@ -43,19 +43,33 @@ const Login = ({ onSubmit, onBackToHome, isLoading, error }: LoginProps) => {
               ← Back to Home
             </LoginStyled.BackButton>
             <LoginStyled.Title>Log in to shop</LoginStyled.Title>
-                    
-            <LoginStyled.Form onSubmit={handleSubmit}>
+                  {/* Mostrar error global si existe */}
+            {error && (
+              <div style={{ color: 'red', marginBottom: '1rem', textAlign: 'center' }}>
+                {error}
+              </div>
+            )}  
+
+            <LoginStyled.Form onSubmit={handleSubmit(onSubmitHandler)}>
               <LoginStyled.InputGroup>
                 <LoginStyled.Label>Username</LoginStyled.Label>
                 <LoginStyled.Input
                   type="text"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
                   placeholder="your_username"
-                  required
-                  // revisar este isloading
-                  disabled={isLoading}
+                  {...register("username", {
+                    required: "Username is required",
+                    minLength: {
+                      value: 3,
+                      message: "Username must be at least 3 characters"
+                    }
+                  })}
                 />
+                {/* Mostrar error de validación */}
+                {errors.username && (
+                  <span style={{ color: 'red', fontSize: '0.8rem' }}>
+                    {errors.username.message}
+                  </span>
+                )}
               </LoginStyled.InputGroup>
 
               <LoginStyled.InputGroup>
@@ -63,34 +77,34 @@ const Login = ({ onSubmit, onBackToHome, isLoading, error }: LoginProps) => {
                 <LoginStyled.InputWrapper>
                   <LoginStyled.Input
                     type={showPassword ? "text" : "password"}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
                     placeholder="Your password"
-                    required
-                    disabled={isLoading}
+                    {...register("password", {
+                      required: "Password is required",
+                      minLength: {
+                        value: 4,
+                        message: "Password must be at least 4 characters"
+                      }
+                    })}
                   />
                   <LoginStyled.PasswordToggle
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    disabled={isLoading}
                   >
                     <span className="material-symbols-outlined">
                       {showPassword ? "visibility_off" : "visibility"}
                     </span>
                   </LoginStyled.PasswordToggle>
                 </LoginStyled.InputWrapper>
-                            
+                             {/* Mostrar error de validación */}
+                {errors.password && (
+                  <span style={{ color: 'red', fontSize: '0.8rem' }}>
+                    {errors.password.message}
+                  </span>
+                )}
                 <LoginStyled.ForgotPasswordLink href="/forgot-password">
                   forgot password?
                 </LoginStyled.ForgotPasswordLink>
               </LoginStyled.InputGroup>
-              {/* revisar */}
-              {error && (
-                <div style={{ color: 'red', marginBottom: '1rem', textAlign: 'center' }}>
-                  {error}
-                </div>
-              )}
-              {/* revisar */}
               <LoginStyled.LoginButton type="submit" disabled={isLoading}>
               Log In
               </LoginStyled.LoginButton>

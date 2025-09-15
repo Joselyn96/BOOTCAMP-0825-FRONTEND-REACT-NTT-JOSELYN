@@ -2,30 +2,39 @@ import { useState } from 'react'
 import Login from '../components/features/Login'
 import LoadingSpinner from '../components/ui/LoadingSpinner'
 import { authService } from '../services/authService'
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../contexts/AuthContext'
 
 const LoginPage = () => {
-const [isLoading, setIsLoading] = useState(false)
-const [error, setError] = useState<string>("")
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string>("")
+  const navigate = useNavigate()
+  const { login } = useAuth()
 
-const handleLogin = async (credentials: { username: string; password: string }) => {
+  const handleLogin = async (credentials: { username: string; password: string }) => {
     setIsLoading(true)
     setError("")
-    
+
     try {
       console.log("Login attempt:", credentials)
-      
-      // Delega la llamada API al servicio
+
+      //se encarga de que service haga el llamado a la api
       const userData = await authService.login(credentials)
-      
+
       console.log("Login successful:", userData)
-      
-      // Maneja qué hacer con los datos (localStorage, navegación)
-      localStorage.setItem('accessToken', userData.accessToken)
-      localStorage.setItem('refreshToken', userData.refreshToken)
-      
-      // Decide a dónde navegar
-      window.location.href = "/products"
-      
+
+      login({
+        id: userData.id,
+        username: userData.username,
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        email: userData.email,
+        image: userData.image
+      }, userData.accessToken, userData.refreshToken)
+
+      // navegacion con router
+      navigate("/products")
+
     } catch (error) {
       console.error("Login error:", error)
       setError(error instanceof Error ? error.message : 'Login failed')
@@ -35,7 +44,7 @@ const handleLogin = async (credentials: { username: string; password: string }) 
   }
 
   const handleBackToHome = () => {
-    window.location.href = "/"
+    navigate("/")
   }
 
   return (

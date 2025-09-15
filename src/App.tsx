@@ -1,4 +1,5 @@
 import "./App.css"
+import { AuthProvider } from "./contexts/AuthContext"
 import AppRoutes from "./routes/Index"
 
 function App() {
@@ -8,7 +9,9 @@ function App() {
     //   <h1>pruebas</h1>
     //   <MyAppStyled.Botoncito>Click me</MyAppStyled.Botoncito>
     // </>
-    <AppRoutes />
+    <AuthProvider>
+      <AppRoutes />
+    </AuthProvider>
   )
 }
 
