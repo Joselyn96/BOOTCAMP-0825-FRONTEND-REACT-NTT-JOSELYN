@@ -1,80 +1,98 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import AuthenticatedNavbar from "../layout/AuthenticateNavbar"
 import SecondaryNavbar from "../layout/SecondaryNavbar"
 import CategoryFilter from "./CategoryFilter"
 import ProductCard from "../ui/ProductCard"
 import Pagination from "../ui/Pagination"
 import usePagination from "../../hooks/usepagination"
-import { fetchAllProducts, fetchProductsByCategory, type Product } from "../../services/productsService"
+import { useProducts } from "../../contexts/ProductsContext"
+import type { Product } from "../../services/productsService"
 
 const Productos = () => {
-  const [products, setProducts] = useState<Product[]>([])
-  const [totalItems, setTotalItems] = useState(0)
-  const [error, setError] = useState<string | null>(null)
   const [selectedCategory, setSelectedCategory] = useState('all')
+  const [searchTerm, setSearchTerm] = useState('')
+  const [isSearching, setIsSearching] = useState(false)
+
+  // contexto global
+  const { allProducts, isLoading, error, loadAllProducts } = useProducts()
+
+  // productos filtrados
+  const filteredProducts = useMemo(() => {
+    let filtered: Product[] = allProducts
+
+    // filtrar por categoría
+    if (selectedCategory !== 'all') {
+      filtered = filtered.filter((product: Product) => product.category === selectedCategory)
+    }
+
+    // filtrar por busqueda
+    if (isSearching && searchTerm.trim().length >= 3) {
+      const searchLower = searchTerm.toLowerCase().trim()
+      filtered = filtered.filter((product: Product) =>
+        product.title.toLowerCase().includes(searchLower)
+      )
+    }
+
+    return filtered
+  }, [allProducts, selectedCategory, isSearching, searchTerm])
 
   const pagination = usePagination({
-    totalItems,
+    totalItems: filteredProducts.length,
     itemsPerPage: 30,
     groupSize: 3
   })
 
-  const loadProducts = async () => {
-    try {
-      setError(null)
-      pagination.setLoading(true)
-      let data
-      if (selectedCategory === 'all') {
-        data = await fetchAllProducts(30, pagination.skip)
-      } else {
-        data = await fetchProductsByCategory(selectedCategory, 30, pagination.skip)
-      }
-      setProducts(data.products)
-
-      // actualizar total
-      if (totalItems === 0) {
-        setTotalItems(data.total)
-      }
-    } catch (error) {
-      console.error('Error loading products:', error)
-      setError('Error al cargar productos')
-    } finally {
-      pagination.setLoading(false)
-    }
-  }
+  const currentPageProducts = useMemo(() => {
+    const start = pagination.skip
+    const end = start + 30
+    return filteredProducts.slice(start, end)
+  }, [filteredProducts, pagination.skip])
 
   useEffect(() => {
-    if (totalItems > 0 || pagination.currentPage === 1) {
-      loadProducts()
-    }
-  }, [pagination.currentPage, selectedCategory])
+    loadAllProducts()
+  }, [loadAllProducts])
 
-  // para cambio de categoría
+  useEffect(() => {
+    if (pagination.currentPage !== 1) {
+      pagination.goToPage(1)
+    }
+  }, [selectedCategory, searchTerm, isSearching])
+
   const handleCategoryChange = (slug: string) => {
     console.log('Categoría seleccionada:', slug)
     setSelectedCategory(slug)
+  }
 
-    if (pagination.currentPage !== 1) {
-      pagination.goToPage(1)
-    } else {
-      loadProducts()
-    }
+  // búsqueda
+  const handleSearch = (query: string) => {
+    console.log('Búsqueda local:', query)
+    setSearchTerm(query)
+    setIsSearching(true)
+  }
+
+  // limpiar búsqueda
+  const handleClearSearch = () => {
+    console.log('Limpiando búsqueda')
+    setSearchTerm('')
+    setIsSearching(false)
   }
 
   return (
     <>
       <AuthenticatedNavbar
-        cartItemCount={2}
+        cartItemCount={1}
         onCartClick={() => console.log('Carrito clicked')}
       />
+
       <SecondaryNavbar
         activeTab="products"
-        onSearch={(query) => console.log('Search query:', query)}
+        onSearch={handleSearch}
+        onClearSearch={handleClearSearch}
+        searchValue={searchTerm}
       />
+
       <div className="main-layout">
-        <CategoryFilter
-          onCategoryChange={handleCategoryChange}
-        />
+        <CategoryFilter onCategoryChange={handleCategoryChange} />
 
         <div className="products-area">
           {error && (
@@ -82,8 +100,29 @@ const Productos = () => {
               {error}
             </div>
           )}
+          
+          {isLoading && (
+            <div>Cargando productos...</div>
+          )}
+          
+          {isSearching && searchTerm && (
+            <div style={{
+              padding: '10px',
+              background: '#f8f9fa',
+              borderRadius: '4px',
+              marginBottom: '20px',
+              border: '1px solid #dee2e6'
+            }}>
+              <span>Mostrando resultados para: <strong>"{searchTerm}"</strong></span>
+              {selectedCategory !== 'all' && (
+                <span> en la categoría <strong>{selectedCategory}</strong></span>
+              )}
+              <span> ({filteredProducts.length} productos encontrados)</span>
+            </div>
+          )}
+
           <div className="products-grid">
-            {products.map(product => (
+            {currentPageProducts.map(product => (
               <ProductCard
                 key={product.id}
                 id={product.id}
@@ -96,13 +135,14 @@ const Productos = () => {
               />
             ))}
           </div>
-          {totalItems > 30 && (
+
+          {filteredProducts.length > 30 && (
             <Pagination
               currentPage={pagination.currentPage}
               visiblePages={pagination.visiblePages}
               hasPrevGroup={pagination.hasPrevGroup}
               hasNextGroup={pagination.hasNextGroup}
-              loading={pagination.loading}
+              loading={isLoading}
               onPageChange={pagination.goToPage}
               onPrevGroup={pagination.goToPrevGroup}
               onNextGroup={pagination.goToNextGroup}
@@ -110,7 +150,6 @@ const Productos = () => {
           )}
         </div>
       </div>
-      <h1>Productos</h1>
     </>
   )
 }

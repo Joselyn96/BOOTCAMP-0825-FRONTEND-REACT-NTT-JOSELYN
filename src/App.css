@@ -38,7 +38,7 @@
   }
 }
 
-/* CSS para el grid de productos y mensajes de error */
+/* grid de productos y mensajes de error */
 .products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -62,4 +62,42 @@
     gap: 1rem;
     width: 100%;
   }
+}
+
+/* búsqueda con posición relativa */
+.search-container-relative {
+  position: relative;
+}
+
+/* X para limpiar búsqueda */
+.search-clear-button {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: #f8f9fa;
+  cursor: pointer;
+  font-size: 20px;
+  color: #666;
+  width: 50px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 4px 4px 0;
+  transition: all 0.2s ease;
+}
+
+.search-clear-button:active {
+  background: #dee2e6;
+}
+
+/* error de búsqueda */
+.search-error-message {
+  color: #e74c3c;
+  font-size: 12px;
+  margin-top: 4px;
+  text-align: center;
+  font-weight: 500;
 }

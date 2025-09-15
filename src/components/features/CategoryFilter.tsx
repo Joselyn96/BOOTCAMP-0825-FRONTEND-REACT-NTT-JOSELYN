@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import CategoryFilterStyled from './CategoryFilter.styled'
-import { fetchProductsByCategory, fetchAllProducts } from '../../services/productsService'
+import { useProducts } from '../../contexts/ProductsContext'
+import type { Product } from '../../services/productsService'
 
 interface Category {
   name: string
@@ -15,62 +16,40 @@ interface CategoryFilterProps {
 const CategoryFilter = ({ onCategoryChange }: CategoryFilterProps) => {
   const [activeCategory, setActiveCategory] = useState('all')
   const [isOpen, setIsOpen] = useState(false)
-  const [totalProducts, setTotalProducts] = useState(0)
-  const [categoryData, setCategoryData] = useState({
-    beauty: 0,
-    laptops: 0,
-    smartphones: 0,
-    furniture: 0,
-    groceries: 0,
-    tablets: 0
-  })
+  
+  // Usar el contexto global
+  const { allProducts, loadAllProducts } = useProducts()
 
-  //total de productos segun la api
+  // Cargar productos al montar si no están cargados
   useEffect(() => {
-    const loadData = async () => {
-      try {
-        // Total de productos
-        const data = await fetchAllProducts()
-        setTotalProducts(data.total)
-        
-        // Conteos por categoría
-        const beauty = await fetchProductsByCategory('beauty')
-        const laptops = await fetchProductsByCategory('laptops')
-        const smartphones = await fetchProductsByCategory('smartphones')
-        const furniture = await fetchProductsByCategory('furniture')
-        const groceries = await fetchProductsByCategory('groceries')
-        const tablets = await fetchProductsByCategory('tablets')
-        
-        setCategoryData({
-          beauty: beauty.total,
-          laptops: laptops.total,
-          smartphones: smartphones.total,
-          furniture: furniture.total,
-          groceries: groceries.total,
-          tablets: tablets.total
-        })
-        
-      } catch (error) {
-        console.error('Error loading data:', error)
-      }
-    }
+    loadAllProducts()
+  }, [loadAllProducts])
 
-    loadData()
-  }, [])
+  // Calcular conteos por categoría usando los productos cacheados
+  const categoryData = useMemo(() => {
+    if (allProducts.length === 0) return {}
 
-const usedProducts = Object.values(categoryData).reduce((sum, count) => sum + count, 0)
-  const otherCount = totalProducts - usedProducts
+    // Contar productos por categoría
+    const counts = allProducts.reduce((acc: Record<string, number>, product: Product) => {
+      const category = product.category
+      acc[category] = (acc[category] || 0) + 1
+      return acc
+    }, {} as Record<string, number>)
 
-  const categories: Category[] = [
-    { name: 'All categories', count: totalProducts, slug: 'all' },
-    { name: 'Beauty', count: categoryData.beauty, slug: 'beauty' },
-    { name: 'Laptops', count: categoryData.laptops, slug: 'laptops' },
-    { name: 'Smartphones', count: categoryData.smartphones, slug: 'smartphones' },
-    { name: 'Furniture', count: categoryData.furniture, slug: 'furniture' },
-    { name: 'Groceries', count: categoryData.groceries, slug: 'groceries' },
-    { name: 'Tablets', count: categoryData.tablets, slug: 'tablets' },
-    { name: 'Other', count: otherCount > 0 ? otherCount : 0, slug: 'other' }
-  ]
+    return counts
+  }, [allProducts])
+
+  // Definir las categorías con sus conteos
+  const categories: Category[] = useMemo(() => [
+    { name: 'All categories', count: allProducts.length, slug: 'all' },
+    { name: 'Beauty', count: categoryData.beauty || 0, slug: 'beauty' },
+    { name: 'Laptops', count: categoryData.laptops || 0, slug: 'laptops' },
+    { name: 'Smartphones', count: categoryData.smartphones || 0, slug: 'smartphones' },
+    { name: 'Furniture', count: categoryData.furniture || 0, slug: 'furniture' },
+    { name: 'Groceries', count: categoryData.groceries || 0, slug: 'groceries' },
+    { name: 'Tablets', count: categoryData.tablets || 0, slug: 'tablets' },
+    { name: 'Men\'s Shirts', count: categoryData['mens-shirts'] || 0, slug: 'mens-shirts' }
+  ], [allProducts.length, categoryData])
 
   const handleCategoryClick = (slug: string) => {
     setActiveCategory(slug)
