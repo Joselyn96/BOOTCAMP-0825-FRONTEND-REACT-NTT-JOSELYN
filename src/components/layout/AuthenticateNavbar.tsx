@@ -23,7 +23,7 @@ const AuthenticatedNavbar = ({
     <AuthenticatedNavbarStyled.NavContainer>
       <AuthenticatedNavbarStyled.UserInfo>
         <AuthenticatedNavbarStyled.MaterialIcon>person</AuthenticatedNavbarStyled.MaterialIcon>
-        <span>{user?.firstName || 'User'}</span>
+        <span>{user?.username || 'User'}</span>
       </AuthenticatedNavbarStyled.UserInfo>
       <AuthenticatedNavbarStyled.IconButton>
         <AuthenticatedNavbarStyled.MaterialIcon>favorite</AuthenticatedNavbarStyled.MaterialIcon>

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 const NavContainer = styled.nav`
   background: white;
   border-bottom: 1px solid #e1e5e9;
-  padding: 0.75rem 1rem;
+  padding: 1rem;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -12,7 +12,7 @@ const NavContainer = styled.nav`
 
   @media (max-width: 768px) {
     gap: 1rem;
-    padding: 0.5rem;
+    padding: 1rem;
   }
 `
 

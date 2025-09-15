@@ -18,3 +18,22 @@
     display: none;
   }
 }
+
+.main-layout {
+  display: flex;
+}
+
+.products-area {
+  flex: 1;
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .main-layout {
+    flex-direction: column;
+  }
+
+  .products-area {
+    width: 100%;
+  }
+}
