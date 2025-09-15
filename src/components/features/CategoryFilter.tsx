@@ -1,6 +1,6 @@
-// components/features/CategoryFilter.tsx
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import CategoryFilterStyled from './CategoryFilter.styled'
+import { fetchProductsByCategory, fetchAllProducts } from '../../services/productsService'
 
 interface Category {
   name: string
@@ -15,21 +15,66 @@ interface CategoryFilterProps {
 const CategoryFilter = ({ onCategoryChange }: CategoryFilterProps) => {
   const [activeCategory, setActiveCategory] = useState('all')
   const [isOpen, setIsOpen] = useState(false)
+  const [totalProducts, setTotalProducts] = useState(0)
+  const [categoryData, setCategoryData] = useState({
+    beauty: 0,
+    laptops: 0,
+    smartphones: 0,
+    furniture: 0,
+    groceries: 0,
+    tablets: 0
+  })
 
-  // Datos mock para maquetado
+  //total de productos segun la api
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        // Total de productos
+        const data = await fetchAllProducts()
+        setTotalProducts(data.total)
+        
+        // Conteos por categoría
+        const beauty = await fetchProductsByCategory('beauty')
+        const laptops = await fetchProductsByCategory('laptops')
+        const smartphones = await fetchProductsByCategory('smartphones')
+        const furniture = await fetchProductsByCategory('furniture')
+        const groceries = await fetchProductsByCategory('groceries')
+        const tablets = await fetchProductsByCategory('tablets')
+        
+        setCategoryData({
+          beauty: beauty.total,
+          laptops: laptops.total,
+          smartphones: smartphones.total,
+          furniture: furniture.total,
+          groceries: groceries.total,
+          tablets: tablets.total
+        })
+        
+      } catch (error) {
+        console.error('Error loading data:', error)
+      }
+    }
+
+    loadData()
+  }, [])
+
+const usedProducts = Object.values(categoryData).reduce((sum, count) => sum + count, 0)
+  const otherCount = totalProducts - usedProducts
+
   const categories: Category[] = [
-    { name: 'All categories', count: 194, slug: 'all' },
-    { name: 'Tablet', count: 8, slug: 'tablets' },
-    { name: 'Laptop', count: 15, slug: 'laptops' },
-    { name: 'Headphones', count: 12, slug: 'mobile-accessories' },
-    { name: 'Console', count: 6, slug: 'gaming' },
-    { name: 'Other', count: 25, slug: 'other' }
+    { name: 'All categories', count: totalProducts, slug: 'all' },
+    { name: 'Beauty', count: categoryData.beauty, slug: 'beauty' },
+    { name: 'Laptops', count: categoryData.laptops, slug: 'laptops' },
+    { name: 'Smartphones', count: categoryData.smartphones, slug: 'smartphones' },
+    { name: 'Furniture', count: categoryData.furniture, slug: 'furniture' },
+    { name: 'Groceries', count: categoryData.groceries, slug: 'groceries' },
+    { name: 'Tablets', count: categoryData.tablets, slug: 'tablets' },
+    { name: 'Other', count: otherCount > 0 ? otherCount : 0, slug: 'other' }
   ]
 
   const handleCategoryClick = (slug: string) => {
     setActiveCategory(slug)
     onCategoryChange?.(slug)
-    // En móvil, cerrar el dropdown después de seleccionar
     if (window.innerWidth <= 768) {
       setIsOpen(false)
     }
@@ -41,7 +86,7 @@ const CategoryFilter = ({ onCategoryChange }: CategoryFilterProps) => {
 
   return (
     <CategoryFilterStyled.Container>
-      <CategoryFilterStyled.Header 
+      <CategoryFilterStyled.Header
         isOpen={isOpen}
         onClick={toggleMobileDropdown}
       >
