@@ -25,7 +25,7 @@ const SecondaryNavbar = ({
         navigate('/products')
         break
       case 'orders':
-        navigate('')
+        navigate('/cart')
         break
       case 'profile':
         navigate('/profile')
@@ -87,7 +87,7 @@ const SecondaryNavbar = ({
           active={activeTab === 'orders'} 
           onClick={() => handleTabClick('orders')}
         >
-          My orders
+          Summary
         </SecondaryNavbarStyled.NavTab>
         <SecondaryNavbarStyled.NavTab 
           active={activeTab === 'profile'} 

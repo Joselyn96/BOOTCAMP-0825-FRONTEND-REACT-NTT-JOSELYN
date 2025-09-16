@@ -19,6 +19,10 @@ const AuthenticatedNavbar = ({
     navigate('/login')
   }
 
+  const handleCartClick = () => {
+  navigate('/cart') // Esto ya navega al carrito
+}
+
   return (
     <AuthenticatedNavbarStyled.NavContainer>
       <AuthenticatedNavbarStyled.UserInfo>
@@ -28,7 +32,7 @@ const AuthenticatedNavbar = ({
       <AuthenticatedNavbarStyled.IconButton>
         <AuthenticatedNavbarStyled.MaterialIcon>favorite</AuthenticatedNavbarStyled.MaterialIcon>
       </AuthenticatedNavbarStyled.IconButton>
-      <AuthenticatedNavbarStyled.IconButton onClick={onCartClick}>
+      <AuthenticatedNavbarStyled.IconButton onClick={handleCartClick}>
         <AuthenticatedNavbarStyled.MaterialIcon>shopping_cart</AuthenticatedNavbarStyled.MaterialIcon>
         {cartItemCount > 0 && <AuthenticatedNavbarStyled.Badge>{cartItemCount}</AuthenticatedNavbarStyled.Badge>}
       </AuthenticatedNavbarStyled.IconButton>

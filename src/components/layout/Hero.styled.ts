@@ -25,7 +25,7 @@ const Background = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url("/modern-ecommerce-hero-shopping-background.jpg");
+  background-image: url("/panel.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

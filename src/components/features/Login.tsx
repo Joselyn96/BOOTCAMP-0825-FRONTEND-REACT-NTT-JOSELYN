@@ -41,10 +41,9 @@ const Login = ({ onSubmit, onBackToHome, onForgotPassword, isLoading, error }: L
         <LoginStyled.FormSection>
           <LoginStyled.Card>
             <LoginStyled.BackButton onClick={onBackToHome}>
-              ← Back to Home
+              Back to Home
             </LoginStyled.BackButton>
             <LoginStyled.Title>Log in to shop</LoginStyled.Title>
-                  {/* Mostrar error global si existe */}
             {error && (
               <div style={{ color: 'red', marginBottom: '1rem', textAlign: 'center' }}>
                 {error}
@@ -65,7 +64,6 @@ const Login = ({ onSubmit, onBackToHome, onForgotPassword, isLoading, error }: L
                     }
                   })}
                 />
-                {/* Mostrar error de validación */}
                 {errors.username && (
                   <span style={{ color: 'red', fontSize: '0.8rem' }}>
                     {errors.username.message}
@@ -96,7 +94,6 @@ const Login = ({ onSubmit, onBackToHome, onForgotPassword, isLoading, error }: L
                     </span>
                   </LoginStyled.PasswordToggle>
                 </LoginStyled.InputWrapper>
-                             {/* Mostrar error de validación */}
                 {errors.password && (
                   <span style={{ color: 'red', fontSize: '0.8rem' }}>
                     {errors.password.message}
@@ -123,7 +120,7 @@ const Login = ({ onSubmit, onBackToHome, onForgotPassword, isLoading, error }: L
             </LoginStyled.Form>
 
             <LoginStyled.LinkText>
-              Don't have an account? <a href="/register">Sign up here</a>
+              Don't have an account? <a href="#">Sign up here</a>
             </LoginStyled.LinkText>
           </LoginStyled.Card>
         </LoginStyled.FormSection>

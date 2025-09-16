@@ -6,6 +6,7 @@ import ProductCard from "../ui/ProductCard"
 import Pagination from "../ui/Pagination"
 import usePagination from "../../hooks/usepagination"
 import { useProducts } from "../../contexts/ProductsContext"
+import { useCart } from "../../hooks/useCart"
 import type { Product } from "../../services/productsService"
 
 const Productos = () => {
@@ -15,6 +16,9 @@ const Productos = () => {
 
   // contexto global
   const { allProducts, isLoading, error, loadAllProducts } = useProducts()
+  
+  // carrito context
+  const { addItem, totalUniqueItems } = useCart()
 
   // productos filtrados
   const filteredProducts = useMemo(() => {
@@ -77,10 +81,20 @@ const Productos = () => {
     setIsSearching(false)
   }
 
+  // agregar producto al carrito
+  const handleAddToCart = (product: Product) => {
+    addItem({
+      id: product.id,
+      title: product.title,
+      price: product.price,
+      image: product.thumbnail
+    })
+  }
+
   return (
     <>
       <AuthenticatedNavbar
-        cartItemCount={1}
+        cartItemCount={totalUniqueItems}
         onCartClick={() => console.log('Carrito clicked')}
       />
 
@@ -130,7 +144,7 @@ const Productos = () => {
                 price={product.price}
                 image={product.thumbnail}
                 rating={product.rating}
-                onAddToCart={(id) => console.log('Add to cart:', id)}
+                onAddToCart={() => handleAddToCart(product)}
                 onWishlistClick={(id) => console.log('Wishlist:', id)}
               />
             ))}

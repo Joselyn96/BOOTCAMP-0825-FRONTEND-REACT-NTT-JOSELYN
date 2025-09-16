@@ -8,7 +8,7 @@ const Profile = () => {
   const { user, isAuthenticated } = useAuth()
   const navigate = useNavigate()
 
-  // si no está autenticado, redirigir
+  // si no está autenticado redirigir
  useEffect(() => {
   if (!isAuthenticated || !user) {
     navigate('/login')
@@ -21,7 +21,6 @@ if (!isAuthenticated || !user) {
 
   return (
     <ProfileStyled.Container>
-      {/* SecondaryNavbar sin búsqueda */}
       <ProfileStyled.NavbarContainer>
         <SecondaryNavbar activeTab="profile" />
       </ProfileStyled.NavbarContainer>
@@ -33,7 +32,6 @@ if (!isAuthenticated || !user) {
           </ProfileStyled.Header>
 
           <ProfileStyled.ProfileContent>
-            {/* Columna Izquierda - Avatar */}
             <ProfileStyled.LeftColumn>
               <ProfileStyled.AvatarSection>
                 <ProfileStyled.Avatar 
@@ -52,8 +50,6 @@ if (!isAuthenticated || !user) {
                 
               </ProfileStyled.AvatarSection>
             </ProfileStyled.LeftColumn>
-
-            {/* Columna Derecha - Datos */}
             <ProfileStyled.RightColumn>
               <ProfileStyled.InfoSection>
                 <ProfileStyled.SectionTitle>Información Personal</ProfileStyled.SectionTitle>
@@ -61,27 +57,23 @@ if (!isAuthenticated || !user) {
                 <ProfileStyled.FormRow>
                   <ProfileStyled.FormGroup>
                     <ProfileStyled.Label>Nombre</ProfileStyled.Label>
+                    <ProfileStyled.InfoValue>{user.firstName}</ProfileStyled.InfoValue>
                   </ProfileStyled.FormGroup>
 
                   <ProfileStyled.FormGroup>
                     <ProfileStyled.Label>Apellido</ProfileStyled.Label>
-                     (
                       <ProfileStyled.InfoValue>{user.lastName}</ProfileStyled.InfoValue>
-                    )
                   </ProfileStyled.FormGroup>
                 </ProfileStyled.FormRow>
 
                 <ProfileStyled.FormGroup>
-                  <ProfileStyled.Label>Usuario</ProfileStyled.Label> : (
+                  <ProfileStyled.Label>Usuario</ProfileStyled.Label>
                     <ProfileStyled.InfoValue>{user.username}</ProfileStyled.InfoValue>
-                  )
                 </ProfileStyled.FormGroup>
 
                 <ProfileStyled.FormGroup>
                   <ProfileStyled.Label>Email</ProfileStyled.Label>
-                  : (
                     <ProfileStyled.InfoValue>{user.email}</ProfileStyled.InfoValue>
-                  )
                 </ProfileStyled.FormGroup>
               </ProfileStyled.InfoSection>
             </ProfileStyled.RightColumn>

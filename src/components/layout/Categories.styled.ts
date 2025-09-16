@@ -99,12 +99,14 @@ const ImageWrapper = styled.div`
 const Image = styled.img.attrs({
   loading: 'lazy',
   decoding: 'async',
+  
 })`
   width: 100%;
   height: 100%;
   object-fit: cover;
   transform: translateZ(0);
   will-change: transform;
+  backface-visibility: hidden;
   transition: transform ${DURATION} ${EASE};
 `
 
@@ -126,7 +128,7 @@ const Item = styled.div`
   transition: transform ${DURATION} ${EASE};
 
   &:hover {
-    transform: translate3d(0, -6px, 0) scale(1.04);
+    transform: translate3d(0, -6px, 0) scale(1.02);
   }
 
   /* 👇 Hover apuntando a los componentes */
@@ -134,7 +136,7 @@ const Item = styled.div`
   border-color: var(--primary, #16a34a); 
   }
   &:hover ${Image} { 
-  transform: translateZ(0) scale(1.06); 
+  transform: translateZ(0) scale(1.02); 
   }
   &:hover ${Name} { 
   color: var(--primary, #16a34a); 
