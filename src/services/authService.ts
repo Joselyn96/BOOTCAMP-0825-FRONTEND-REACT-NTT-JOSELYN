@@ -67,5 +67,22 @@ export const authService = {
 
         // respuesta transformada
         return mappedData
+    },
+
+    requestPasswordReset: async (email: string): Promise<{success: boolean, message: string}> => {
+        // validar formato de email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        
+        if (!emailRegex.test(email)) {
+            throw new Error('Por favor ingresa un email válido')
+        }
+        
+        // delay de envío
+        await new Promise(resolve => setTimeout(resolve, 1500))
+        
+        return {
+            success: true,
+            message: 'Si el email existe en nuestro sistema, recibirás un enlace de recuperación'
+        }
     }
 }

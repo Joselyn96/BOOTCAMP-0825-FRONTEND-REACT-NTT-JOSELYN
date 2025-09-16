@@ -12,11 +12,12 @@ interface LoginFormData {
 interface LoginProps {
   onSubmit: (credentials: LoginFormData) => void
   onBackToHome: () => void
+  onForgotPassword?: () => void 
   isLoading: boolean
   error?: string
 }
 
-const Login = ({ onSubmit, onBackToHome, isLoading, error }: LoginProps) => {
+const Login = ({ onSubmit, onBackToHome, onForgotPassword, isLoading, error }: LoginProps) => {
   const [showPassword, setShowPassword] = useState(false)
 // react-hook-form
   const { register, handleSubmit, formState: { errors } } = useForm<LoginFormData>()
@@ -101,9 +102,20 @@ const Login = ({ onSubmit, onBackToHome, isLoading, error }: LoginProps) => {
                     {errors.password.message}
                   </span>
                 )}
-                <LoginStyled.ForgotPasswordLink href="/forgot-password">
-                  forgot password?
-                </LoginStyled.ForgotPasswordLink>
+                {onForgotPassword ? (
+  <LoginStyled.ForgotPasswordLink 
+    as="button"
+    type="button"
+    onClick={onForgotPassword}
+    style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
+  >
+    forgot password?
+  </LoginStyled.ForgotPasswordLink>
+) : (
+  <LoginStyled.ForgotPasswordLink href="/forgot-password">
+    forgot password?
+  </LoginStyled.ForgotPasswordLink>
+)}
               </LoginStyled.InputGroup>
               <LoginStyled.LoginButton type="submit" disabled={isLoading}>
               Log In

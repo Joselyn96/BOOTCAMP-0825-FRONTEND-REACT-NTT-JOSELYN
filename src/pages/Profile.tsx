@@ -1,19 +1,12 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import SecondaryNavbar from '../components/layout/SecondaryNavbar'
 import ProfileStyled from './Profile.styled'
 
 const Profile = () => {
-  const { user, logout, isAuthenticated } = useAuth()
+  const { user, isAuthenticated } = useAuth()
   const navigate = useNavigate()
-  const [isEditing, setIsEditing] = useState(false)
-  const [editForm, setEditForm] = useState({
-    firstName: user?.firstName || '',
-    lastName: user?.lastName || '',
-    email: user?.email || '',
-    username: user?.username || ''
-  })
 
   // si no está autenticado, redirigir
  useEffect(() => {
@@ -25,41 +18,6 @@ const Profile = () => {
 if (!isAuthenticated || !user) {
   return null
 }
-
-  const handleEditToggle = () => {
-    if (isEditing) {
-      // cancelar edición, restaurar valores originales
-      setEditForm({
-        firstName: user?.firstName || '',
-        lastName: user?.lastName || '',
-        email: user?.email || '',
-        username: user?.username || ''
-      })
-    }
-    setIsEditing(!isEditing)
-  }
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setEditForm(prev => ({
-      ...prev,
-      [name]: value
-    }))
-  }
-
-  const handleSaveProfile = () => {
-    // Aquí implementarías la lógica para guardar los cambios
-    console.log('Guardando perfil:', editForm)
-    alert('Perfil actualizado exitosamente')
-    setIsEditing(false)
-  }
-
-  const handleLogout = () => {
-    if (window.confirm('¿Estás seguro que deseas cerrar sesión?')) {
-      logout()
-      navigate('/login')
-    }
-  }
 
   return (
     <ProfileStyled.Container>
@@ -92,11 +50,6 @@ if (!isAuthenticated || !user) {
                   <ProfileStyled.UserEmail>@{user.username}</ProfileStyled.UserEmail>
                 </ProfileStyled.AvatarInfo>
                 
-                {isEditing && (
-                  <ProfileStyled.ChangePhotoButton>
-                    Cambiar Foto
-                  </ProfileStyled.ChangePhotoButton>
-                )}
               </ProfileStyled.AvatarSection>
             </ProfileStyled.LeftColumn>
 
@@ -108,59 +61,27 @@ if (!isAuthenticated || !user) {
                 <ProfileStyled.FormRow>
                   <ProfileStyled.FormGroup>
                     <ProfileStyled.Label>Nombre</ProfileStyled.Label>
-                    {isEditing ? (
-                      <ProfileStyled.Input
-                        type="text"
-                        name="firstName"
-                        value={editForm.firstName}
-                        onChange={handleInputChange}
-                      />
-                    ) : (
-                      <ProfileStyled.InfoValue>{user.firstName}</ProfileStyled.InfoValue>
-                    )}
                   </ProfileStyled.FormGroup>
 
                   <ProfileStyled.FormGroup>
                     <ProfileStyled.Label>Apellido</ProfileStyled.Label>
-                    {isEditing ? (
-                      <ProfileStyled.Input
-                        type="text"
-                        name="lastName"
-                        value={editForm.lastName}
-                        onChange={handleInputChange}
-                      />
-                    ) : (
+                     (
                       <ProfileStyled.InfoValue>{user.lastName}</ProfileStyled.InfoValue>
-                    )}
+                    )
                   </ProfileStyled.FormGroup>
                 </ProfileStyled.FormRow>
 
                 <ProfileStyled.FormGroup>
-                  <ProfileStyled.Label>Usuario</ProfileStyled.Label>
-                  {isEditing ? (
-                    <ProfileStyled.Input
-                      type="text"
-                      name="username"
-                      value={editForm.username}
-                      onChange={handleInputChange}
-                    />
-                  ) : (
+                  <ProfileStyled.Label>Usuario</ProfileStyled.Label> : (
                     <ProfileStyled.InfoValue>{user.username}</ProfileStyled.InfoValue>
-                  )}
+                  )
                 </ProfileStyled.FormGroup>
 
                 <ProfileStyled.FormGroup>
                   <ProfileStyled.Label>Email</ProfileStyled.Label>
-                  {isEditing ? (
-                    <ProfileStyled.Input
-                      type="email"
-                      name="email"
-                      value={editForm.email}
-                      onChange={handleInputChange}
-                    />
-                  ) : (
+                  : (
                     <ProfileStyled.InfoValue>{user.email}</ProfileStyled.InfoValue>
-                  )}
+                  )
                 </ProfileStyled.FormGroup>
               </ProfileStyled.InfoSection>
             </ProfileStyled.RightColumn>
