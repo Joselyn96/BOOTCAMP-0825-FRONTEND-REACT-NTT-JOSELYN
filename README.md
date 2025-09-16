@@ -1,5 +1,3 @@
-# BOOTCAMP-0825-FRONTEND-REACT-NTT-JOSELYN
-
 # dummyStore
 
 Una tienda virtual construida con **React 19.1.1**, **TypeScript** y **Vite**, que utiliza la API pública de [dummyjson](https://dummyjson.com/) para manejar **autenticación de usuarios, productos y categorías**.  
@@ -89,3 +87,4 @@ src/
 │       └── index.test.js
 ├── App.jsx            # Main application component
 └── index.js           # Application entry point
+
