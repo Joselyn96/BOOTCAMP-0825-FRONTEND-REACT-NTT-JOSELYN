@@ -1,4 +1,5 @@
 import SidebarStyled from './Sidebar.styled'
+import { Link } from "react-router-dom";
 
 interface SidebarProps {
   isOpen: boolean
@@ -26,7 +27,7 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
             Contact
           </SidebarStyled.NavLink>
           <SidebarStyled.Login>
-            <SidebarStyled.LoginBtn>Login</SidebarStyled.LoginBtn>
+            <SidebarStyled.LoginBtn as={Link} to="/login">Login</SidebarStyled.LoginBtn>
           </SidebarStyled.Login>
         </SidebarStyled.Nav>
       </SidebarStyled.Content>

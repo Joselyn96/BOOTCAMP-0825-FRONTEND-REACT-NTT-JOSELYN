@@ -91,6 +91,10 @@ const LoginBtn = styled.button`
   &:hover {
     background-color: #16a34a;
   }
+  
+   @media (min-width: 768px) {
+    width: 50px;
+  }
 `
 
 const SidebarStyled = {
