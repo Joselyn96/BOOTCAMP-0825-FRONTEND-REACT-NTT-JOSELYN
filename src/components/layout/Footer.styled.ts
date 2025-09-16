@@ -2,7 +2,7 @@
 import styled from 'styled-components'
 
 const Container = styled.footer`
-  background-color: #1f2937;
+  background-color: #22c55e;
   color: #f9fafb;
   padding: 3rem 1rem 1rem;
   
@@ -44,11 +44,11 @@ const Logo = styled.div`
 const LogoText = styled.h3`
   font-size: 1.5rem;
   font-weight: bold;
-  color: #3b82f6;
+  color: #f9fafb;
 `
 
 const Description = styled.p`
-  color: #9ca3af;
+  color: #f9fafb;
   font-size: 0.875rem;
   line-height: 1.5;
 `
@@ -72,13 +72,13 @@ const LinkList = styled.ul`
 const LinkItem = styled.li``
 
 const Link = styled.a`
-  color: #9ca3af;
+  color: #f9fafb;
   text-decoration: none;
   font-size: 0.875rem;
   transition: color 0.3s ease;
   
   &:hover {
-    color: #3b82f6;
+    color: #f9fafb;
   }
 `
 
@@ -88,11 +88,11 @@ const SocialLinks = styled.div`
 `
 
 const SocialLink = styled.a`
-  color: #9ca3af;
+  color: #f9fafb;
   transition: color 0.3s ease;
   
   &:hover {
-    color: #3b82f6;
+    color: #f9fafb;
   }
   
   svg {
@@ -104,12 +104,11 @@ const SocialLink = styled.a`
 const Bottom = styled.div`
   margin-top: 2rem;
   padding-top: 2rem;
-  border-top: 1px solid #374151;
+  border-top: 1px solid #f9fafb;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  align-items: center;
-  
+
   @media (min-width: 768px) {
     flex-direction: row;
     justify-content: space-between;
@@ -117,7 +116,7 @@ const Bottom = styled.div`
 `
 
 const Copyright = styled.p`
-  color: #9ca3af;
+  color: #f9fafb;
   font-size: 0.875rem;
   margin: 0;
 `

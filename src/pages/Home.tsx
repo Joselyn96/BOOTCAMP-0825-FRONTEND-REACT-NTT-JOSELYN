@@ -7,6 +7,7 @@ import Categories from '../components/layout/Categories'
 import Carousel from '../components/layout/Carousel'
 import Newsletter from '../components/layout/Newsletter'
 import Testimonial from '../components/layout/Testimonial'
+import Footer from '../components/layout/Footer'
 
 // hooks
 import { useScroll } from '../hooks/useScroll'
@@ -34,6 +35,7 @@ const Home = () => {
       <Carousel />
       <Newsletter />
       <Testimonial />
+      <Footer />
     </div>
   )
 }

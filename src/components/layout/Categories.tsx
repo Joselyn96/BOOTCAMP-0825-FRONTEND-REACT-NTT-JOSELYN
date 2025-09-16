@@ -4,32 +4,32 @@ const categories = [
     {
       name: "Smartphones",
       image: "/smartphones.png",
-      description: "Últimos modelos y tecnología",
+      description: "Latest models and technology",
     },
     {
       name: "Laptops",
       image: "/laptops.png",
-      description: "Potencia y rendimiento",
+      description: "Power and performance",
     },
     {
       name: "Fragances",
       image: "/fragance.png",
-      description: "Fragancias exclusivas",
+      description: "Exclusive fragrances",
     },
     {
       name: "Skincare",
       image: "/skincare.png",
-      description: "Cuidado de la piel",
+      description: "Skin care for everyone",
     },
     {
       name: "Groceries",
       image: "/groceries.png",
-      description: "Productos frescos",
+      description: "Fresh produce",
     },
     {
       name: "Ropa",
       image: "/clothes.png",
-      description: "Decoración del hogar",
+      description: "Home decor",
     },
   ]
 

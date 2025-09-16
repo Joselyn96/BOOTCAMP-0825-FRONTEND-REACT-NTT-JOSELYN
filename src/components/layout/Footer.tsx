@@ -2,12 +2,13 @@
 import FooterStyled from './Footer.styled'
 
 const Footer = () => {
+    const currentYear = new Date().getFullYear()
   return (
     <FooterStyled.Container>
       <FooterStyled.Content>
         <FooterStyled.Section>
           <FooterStyled.Logo>
-            <FooterStyled.LogoText>ShopEasy</FooterStyled.LogoText>
+            <FooterStyled.LogoText>dummyStore</FooterStyled.LogoText>
           </FooterStyled.Logo>
           <FooterStyled.Description>
             Making shopping easier and more convenient for everyone.
@@ -74,7 +75,7 @@ const Footer = () => {
 
       <FooterStyled.Bottom>
         <FooterStyled.Copyright>
-          © 2024 ShopEasy. All rights reserved.
+          © {currentYear} dummyStore. All rights reserved.
         </FooterStyled.Copyright>
         <FooterStyled.LegalLinks>
           <FooterStyled.Link href="#privacy">Privacy Policy</FooterStyled.Link>

@@ -4,33 +4,33 @@ import TestimonialsStyled from "./Testimonial.styled"
 const testimonialsData = [
   { 
     name: "María González",  
-    comment: "Excelente servicio y productos de calidad. Muy recomendado.", 
+    comment: "Excellent service and quality products. Highly recommended.", 
     rating: 5 
 },
   { 
     name: 
     "Carlos Rodríguez", 
-    comment: "Entrega rápida y atención al cliente excepcional.", 
+    comment: "Fast delivery and exceptional customer service.", 
     rating: 5 
 },
   { 
     name: "Ana Martínez",     
-    comment: "Gran variedad de productos y precios competitivos.", 
+    comment: "Wide variety of products and competitive prices.", 
     rating: 5 
 },
   { 
     name: "Luis Fernández",   
-    comment: "La mejor experiencia de compra online que he tenido.", 
+    comment: "The best online shopping experience I've ever had.", 
     rating: 5 
 },
   { 
     name: "Carmen López",     
-    comment: "Productos auténticos y envío súper rápido.", 
+    comment: "Authentic products and super fast shipping.", 
     rating: 5 
 },
   { 
     name: "Diego Morales",    
-    comment: "Atención personalizada y precios increíbles.", 
+    comment: "Personalized service and incredible prices.", 
     rating: 5 
 },
 ];

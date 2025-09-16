@@ -13,7 +13,6 @@ const NavbarContainer = styled.div`
   background-color: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
      
-  /* Ocultar el input de búsqueda en el navbar */
   .search-container-relative,
   .search-error-message {
     display: none !important;
@@ -255,7 +254,6 @@ const CheckoutButton = styled.button`
   }
 `
 
-// NUEVOS ESTILOS PARA EL FORMULARIO
 const FormGroup = styled.div`
   margin-bottom: 15px;
 `

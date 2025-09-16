@@ -7,12 +7,12 @@ const Cart = () => {
   const { items, totalPrice, updateQuantity, removeItem } = useCart()
   const [currentStep, setCurrentStep] = useState(1)
   const [formData, setFormData] = useState({
-    nombres: '',
-    apellidos: '',
-    distrito: '',
-    direccion: '',
-    referencia: '',
-    celular: ''
+    firstname: '',
+    lastname: '',
+    district: '',
+    address: '',
+    reference: '',
+    cellphone: ''
   })
 
   const handleQuantityChange = (id: number, newQuantity: number) => {
@@ -41,10 +41,10 @@ const Cart = () => {
   const handlePurchase = (e: React.FormEvent) => {
     e.preventDefault()
     console.log('Datos de compra:', { items, totalPrice, formData })
-    alert('¡Compra realizada con éxito!')
+    alert('¡Purchase completed successfully!')
   }
 
-  // Si carrito esta vacío
+  // si carrito esta vacío
   if (items.length === 0) {
     return (
       <>
@@ -60,7 +60,7 @@ const Cart = () => {
               fontSize: '18px',
               color: '#666' 
             }}>
-              Tu carrito está vacío
+              Your cart is empty
             </div>
           </CartStyled.Content>
         </CartStyled.Container>
@@ -142,20 +142,20 @@ const Cart = () => {
                 </CartStyled.TotalRow>
                 
                 <CartStyled.CheckoutButton onClick={handleNextStep}>
-                  Siguiente
+                  Next
                 </CartStyled.CheckoutButton>
               </>
             ) : (
               <>
-                <CartStyled.SummaryHeader>Datos de envío</CartStyled.SummaryHeader>
+                <CartStyled.SummaryHeader>Shipping information</CartStyled.SummaryHeader>
                 
                 <form onSubmit={handlePurchase}>
                   <CartStyled.FormGroup>
                     <CartStyled.FormInput
                       type="text"
                       name="nombres"
-                      placeholder="Nombres"
-                      value={formData.nombres}
+                      placeholder="first name"
+                      value={formData.firstname}
                       onChange={handleInputChange}
                       required
                     />
@@ -165,8 +165,8 @@ const Cart = () => {
                     <CartStyled.FormInput
                       type="text"
                       name="apellidos"
-                      placeholder="Apellidos"
-                      value={formData.apellidos}
+                      placeholder="last names"
+                      value={formData.lastname}
                       onChange={handleInputChange}
                       required
                     />
@@ -176,8 +176,8 @@ const Cart = () => {
                     <CartStyled.FormInput
                       type="text"
                       name="distrito"
-                      placeholder="Distrito"
-                      value={formData.distrito}
+                      placeholder="District"
+                      value={formData.district}
                       onChange={handleInputChange}
                       required
                     />
@@ -187,8 +187,8 @@ const Cart = () => {
                     <CartStyled.FormInput
                       type="text"
                       name="direccion"
-                      placeholder="Dirección"
-                      value={formData.direccion}
+                      placeholder="Address"
+                      value={formData.address}
                       onChange={handleInputChange}
                       required
                     />
@@ -198,8 +198,8 @@ const Cart = () => {
                     <CartStyled.FormInput
                       type="text"
                       name="referencia"
-                      placeholder="Referencia"
-                      value={formData.referencia}
+                      placeholder="Reference"
+                      value={formData.reference}
                       onChange={handleInputChange}
                     />
                   </CartStyled.FormGroup>
@@ -208,24 +208,24 @@ const Cart = () => {
                     <CartStyled.FormInput
                       type="tel"
                       name="celular"
-                      placeholder="Celular"
-                      value={formData.celular}
+                      placeholder="Cell phone"
+                      value={formData.cellphone}
                       onChange={handleInputChange}
                       required
                     />
                   </CartStyled.FormGroup>
                   
                   <CartStyled.TotalRow style={{ marginTop: '20px' }}>
-                    <span>Total a pagar</span>
+                    <span>Total amount payable</span>
                     <span>$ {totalPrice.toFixed(2)}</span>
                   </CartStyled.TotalRow>
                   
                   <CartStyled.FormButtonGroup>
                     <CartStyled.BackButton type="button" onClick={handlePrevStep}>
-                      Volver
+                       Back
                     </CartStyled.BackButton>
                     <CartStyled.CheckoutButton type="submit">
-                      Comprar
+                      Buy
                     </CartStyled.CheckoutButton>
                   </CartStyled.FormButtonGroup>
                 </form>

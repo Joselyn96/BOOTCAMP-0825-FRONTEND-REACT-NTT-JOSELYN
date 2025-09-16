@@ -28,7 +28,7 @@ if (!isAuthenticated || !user) {
       <ProfileStyled.Content>
         <ProfileStyled.ProfileCard>
           <ProfileStyled.Header>
-            <ProfileStyled.Title>Mi Perfil</ProfileStyled.Title>
+            <ProfileStyled.Title>My Profile</ProfileStyled.Title>
           </ProfileStyled.Header>
 
           <ProfileStyled.ProfileContent>
@@ -52,22 +52,22 @@ if (!isAuthenticated || !user) {
             </ProfileStyled.LeftColumn>
             <ProfileStyled.RightColumn>
               <ProfileStyled.InfoSection>
-                <ProfileStyled.SectionTitle>Información Personal</ProfileStyled.SectionTitle>
+                <ProfileStyled.SectionTitle>Personal Information</ProfileStyled.SectionTitle>
                 
                 <ProfileStyled.FormRow>
                   <ProfileStyled.FormGroup>
-                    <ProfileStyled.Label>Nombre</ProfileStyled.Label>
+                    <ProfileStyled.Label>Name</ProfileStyled.Label>
                     <ProfileStyled.InfoValue>{user.firstName}</ProfileStyled.InfoValue>
                   </ProfileStyled.FormGroup>
 
                   <ProfileStyled.FormGroup>
-                    <ProfileStyled.Label>Apellido</ProfileStyled.Label>
+                    <ProfileStyled.Label>Last name</ProfileStyled.Label>
                       <ProfileStyled.InfoValue>{user.lastName}</ProfileStyled.InfoValue>
                   </ProfileStyled.FormGroup>
                 </ProfileStyled.FormRow>
 
                 <ProfileStyled.FormGroup>
-                  <ProfileStyled.Label>Usuario</ProfileStyled.Label>
+                  <ProfileStyled.Label>User</ProfileStyled.Label>
                     <ProfileStyled.InfoValue>{user.username}</ProfileStyled.InfoValue>
                 </ProfileStyled.FormGroup>
 
