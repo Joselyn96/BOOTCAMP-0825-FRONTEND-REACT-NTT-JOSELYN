@@ -38,7 +38,7 @@ Una tienda virtual construida con **React 19.1.1**, **TypeScript** y **Vite**, q
 
 1. Clonar el repositorio:
    ```bash
-   git clone <[repository-url](https://github.com/Joselyn96/BOOTCAMP-0825-FRONTEND-REACT-NTT-JOSELYN.git)>
+   git clone al repositorio
 2. Moverse a la rama feature/proyecto-Integrador
 3. Instalar dependencias: npm install
 4. Iniciar el servidor de desarrollo: npm run dev
@@ -46,6 +46,8 @@ Una tienda virtual construida con **React 19.1.1**, **TypeScript** y **Vite**, q
  username: emilys
  password: emilyspass
 ### Arquitectura del Proyecto
+
+```plaintext
 src/
 ├── components/           # Reusable UI components
 │   ├── Avatar/
