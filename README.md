@@ -2,6 +2,8 @@
 
 Una tienda virtual construida con **React 19.1.1**, **TypeScript** y **Vite**, que utiliza la API pública de [dummyjson](https://dummyjson.com/) para manejar **autenticación de usuarios, productos y categorías**.  
 ---
+#Visita la pagina
+https://dummy-store-vert.vercel.app/
 
 ## Características
 
