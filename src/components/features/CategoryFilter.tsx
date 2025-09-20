@@ -17,19 +17,17 @@ const CategoryFilter = ({ onCategoryChange }: CategoryFilterProps) => {
   const [activeCategory, setActiveCategory] = useState('all')
   const [isOpen, setIsOpen] = useState(false)
   
-  // Usar el contexto global
+  // contexto global
   const { allProducts, loadAllProducts } = useProducts()
 
-  // Cargar productos al montar si no están cargados
   useEffect(() => {
     loadAllProducts()
   }, [loadAllProducts])
 
-  // Calcular conteos por categoría usando los productos cacheados
+  // conteos por categorio
   const categoryData = useMemo(() => {
     if (allProducts.length === 0) return {}
 
-    // Contar productos por categoría
     const counts = allProducts.reduce((acc: Record<string, number>, product: Product) => {
       const category = product.category
       acc[category] = (acc[category] || 0) + 1
@@ -39,7 +37,7 @@ const CategoryFilter = ({ onCategoryChange }: CategoryFilterProps) => {
     return counts
   }, [allProducts])
 
-  // Definir las categorías con sus conteos
+  // categorías con sus conteos
   const categories: Category[] = useMemo(() => [
     { name: 'All categories', count: allProducts.length, slug: 'all' },
     { name: 'Beauty', count: categoryData.beauty || 0, slug: 'beauty' },

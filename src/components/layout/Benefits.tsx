@@ -2,7 +2,7 @@ import BenefitsStyled from './Benefits.styled'
 
 const benefitsData = [
   {
-    icon: "delivery_truck_bolt", // Google Icon name
+    icon: "delivery_truck_bolt",
     title: "FAST",
     subtitle: "DELIVERY"
   },

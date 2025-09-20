@@ -1,0 +1,64 @@
+{
+  "districts": [
+    {
+      "id": 1,
+      "name": "Miraflores",
+      "province": "Lima",
+      "region": "Lima"
+    },
+    {
+      "id": 2,
+      "name": "San Isidro",
+      "province": "Lima",
+      "region": "Lima"
+    },
+    {
+      "id": 3,
+      "name": "Barranco",
+      "province": "Lima",
+      "region": "Lima"
+    },
+    {
+      "id": 4,
+      "name": "Chorrillos",
+      "province": "Lima",
+      "region": "Lima"
+    },
+    {
+      "id": 5,
+      "name": "La Molina",
+      "province": "Lima",
+      "region": "Lima"
+    },
+    {
+      "id": 6,
+      "name": "San Borja",
+      "province": "Lima",
+      "region": "Lima"
+    },
+    {
+      "id": 7,
+      "name": "Surco",
+      "province": "Lima",
+      "region": "Lima"
+    },
+    {
+      "id": 8,
+      "name": "Pueblo Libre",
+      "province": "Lima",
+      "region": "Lima"
+    },
+    {
+      "id": 9,
+      "name": "Jesus María",
+      "province": "Lima",
+      "region": "Lima"
+    },
+    {
+      "id": 10,
+      "name": "Lince",
+      "province": "Lima",
+      "region": "Lima"
+    }
+  ]
+}

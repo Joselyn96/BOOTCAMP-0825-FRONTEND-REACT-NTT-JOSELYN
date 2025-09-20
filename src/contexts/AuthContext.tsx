@@ -16,6 +16,7 @@ interface AuthContextType {
   user: User | null
   isAuthenticated: boolean
   accessToken: string | null
+  isLoading: boolean
   login: (userData: User, accessToken: string, refreshToken: string) => void
   logout: () => void
 }
@@ -31,6 +32,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User | null>(null)
   const [accessToken, setAccessToken] = useState<string | null>(null)
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
 
   // revisar si hay datos en localStorage al cargarr
   useEffect(() => {
@@ -53,6 +55,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         localStorage.removeItem('userData')
       }
     }
+    setIsLoading(false)
   }, [])
 
   const login = (userData: User, accessToken: string, refreshToken: string) => {
@@ -87,6 +90,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     user,
     isAuthenticated,
     accessToken,
+    isLoading,
     login,
     logout
   }

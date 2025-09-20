@@ -8,17 +8,16 @@ import usePagination from "../../hooks/usepagination"
 import { useProducts } from "../../contexts/ProductsContext"
 import { useCart } from "../../hooks/useCart"
 import type { Product } from "../../services/productsService"
+import Alert from "../ui/Alert"
 
 const Productos = () => {
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [searchTerm, setSearchTerm] = useState('')
   const [isSearching, setIsSearching] = useState(false)
+  const { addItem, totalUniqueItems, items, showStockAlert, showAlert, alertType, alertMessage } = useCart()
 
   // contexto global
   const { allProducts, isLoading, error, loadAllProducts } = useProducts()
-  
-  // carrito context
-  const { addItem, totalUniqueItems } = useCart()
 
   // productos filtrados
   const filteredProducts = useMemo(() => {
@@ -83,11 +82,21 @@ const Productos = () => {
 
   // agregar producto al carrito
   const handleAddToCart = (product: Product) => {
+    console.log(`${product.title} - Stock: ${product.stock}`)
+    const existingItem = items.find(item => item.id === product.id)
+    const currentQuantity = existingItem ? existingItem.quantity : 0
+
+    if (currentQuantity >= product.stock) {
+    showStockAlert(product.title)
+    return
+  }
+
     addItem({
       id: product.id,
       title: product.title,
       price: product.price,
-      image: product.thumbnail
+      image: product.thumbnail,
+      stock: product.stock
     })
   }
 
@@ -114,11 +123,11 @@ const Productos = () => {
               {error}
             </div>
           )}
-          
+
           {isLoading && (
             <div>Cargando productos...</div>
           )}
-          
+
           {isSearching && searchTerm && (
             <div style={{
               padding: '10px',
@@ -127,11 +136,11 @@ const Productos = () => {
               marginBottom: '20px',
               border: '1px solid #dee2e6'
             }}>
-              <span>Mostrando resultados para: <strong>"{searchTerm}"</strong></span>
+              <span>Showing results for: <strong>"{searchTerm}"</strong></span>
               {selectedCategory !== 'all' && (
-                <span> en la categoría <strong>{selectedCategory}</strong></span>
+                <span> the category <strong>{selectedCategory}</strong></span>
               )}
-              <span> ({filteredProducts.length} productos encontrados)</span>
+              <span> ({filteredProducts.length} products found)</span>
             </div>
           )}
 
@@ -164,6 +173,11 @@ const Productos = () => {
           )}
         </div>
       </div>
+      <Alert
+        show={showAlert}
+        type={alertType}
+        message={alertMessage}
+      />
     </>
   )
 }

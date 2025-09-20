@@ -17,7 +17,7 @@ export interface ProductsResponse {
   limit: number
 }
 
-// obtener productos de API
+// obtener productos de api
 export const fetchAllProducts = async (limit: number = 30, skip: number = 0): Promise<ProductsResponse> => {
   try {
     const response = await fetch(
@@ -56,8 +56,7 @@ export const fetchProductsByCategory = async (
     throw error
   }
 }
-//*
-// NUEVA FUNCIÓN: buscar productos por término
+
 export const searchProducts = async (
   searchTerm: string,
   limit: number = 30,
@@ -79,7 +78,6 @@ export const searchProducts = async (
   }
 }
 
-// NUEVA FUNCIÓN: buscar productos por término y filtrar por categoría
 export const searchProductsByCategory = async (
   searchTerm: string,
   category: string,
@@ -87,15 +85,13 @@ export const searchProductsByCategory = async (
   skip: number = 0
 ): Promise<ProductsResponse> => {
   try {
-    // Primero obtenemos todos los resultados de búsqueda
-    const searchResponse = await searchProducts(searchTerm, 100, 0) // Pedimos más para filtrar
-    
-    // Filtramos por categoría
+    // todos los resultados de búsqueda
+    const searchResponse = await searchProducts(searchTerm, 100, 0)
+    // por categoría
     const filteredProducts = searchResponse.products.filter(
       product => product.category === category
     )
     
-    // Aplicamos paginación manual
     const startIndex = skip
     const endIndex = skip + limit
     const paginatedProducts = filteredProducts.slice(startIndex, endIndex)

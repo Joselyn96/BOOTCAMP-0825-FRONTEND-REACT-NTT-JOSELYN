@@ -16,11 +16,12 @@ const AuthenticatedNavbar = ({
 
   const handleLogout = () => {
     logout()
-    navigate('/login')
+    navigate('/')
+    // window.location.href = '/'
   }
 
   const handleCartClick = () => {
-  navigate('/cart') // Esto ya navega al carrito
+  navigate('/cart')
 }
 
   return (

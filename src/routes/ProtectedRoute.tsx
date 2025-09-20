@@ -7,23 +7,27 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
-  const { isAuthenticated } = useAuth()
+  const { isAuthenticated, isLoading } = useAuth()
   const navigate = useNavigate()
 
   useEffect(() => {
     console.log('ProtectedRoute - isAuthenticated:', isAuthenticated)
-    
-    if (!isAuthenticated) {
+
+    if (!isLoading && !isAuthenticated) {
       console.log('Usuario no autenticado, redirigiendo a /login')
       navigate('/login')
     }
-  }, [isAuthenticated, navigate])
+  }, [isAuthenticated, isLoading, navigate])
 
   // verrificamos el estado de autenticación
-  if (!isAuthenticated) {
+  if (isLoading) {
     return null
   }
 
+  if (!isAuthenticated) {
+    return null
+  }
+  
   return <>{children}</>
 }
 

@@ -112,7 +112,7 @@ const LoginPage = () => {
         onClose={() => setShowSuccessModal(false)}
         type="error"
         title="Email procesado"
-        description="Si el email existe en nuestro sistema, recibirás un enlace de recuperación en tu bandeja de entrada."
+        description="Recibirás un enlace de recuperación en tu bandeja de entrada."
         confirmText="Entendido"
       />
 
