@@ -8,7 +8,6 @@ interface AuthenticatedNavbarProps {
 }
 
 const AuthenticatedNavbar = ({ 
-  onCartClick, 
   cartItemCount = 0, 
 }: AuthenticatedNavbarProps) => {
   const { user, logout } = useAuth()

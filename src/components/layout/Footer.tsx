@@ -1,4 +1,3 @@
-// components/layout/Footer.js
 import FooterStyled from './Footer.styled'
 
 const Footer = () => {

@@ -27,7 +27,7 @@ const categories = [
       description: "Fresh produce",
     },
     {
-      name: "Ropa",
+      name: "clothes",
       image: "/clothes.png",
       description: "Home decor",
     },
