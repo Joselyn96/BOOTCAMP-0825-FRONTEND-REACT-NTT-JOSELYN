@@ -1,69 +1,93 @@
-# React + TypeScript + Vite
+# dummyStore
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Una tienda virtual construida con **React 19.1.1**, **TypeScript** y **Vite**, que utiliza la API pública de [dummyjson](https://dummyjson.com/) para manejar **autenticación de usuarios, productos y categorías**.  
+---
+# Visita la pagina
 
-Currently, two official plugins are available:
+https://dummy-store-vert.vercel.app/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Características
 
-## Expanding the ESLint configuration
+- **Tecnología Moderna:** React 19.1.1 + Vite + TypeScript  
+- **Validación de Formularios:** Validaciones en cliente con mensajes de error dinámicos  
+- **Diseño Responsivo:** Enfoque mobile-first con Styled Components  
+- **Autenticación:** Login mediante API dummyjson  
+- **Gestión de Estado:** Context API y custom hooks  
+- **Carrito de Compras:** Agregar, quitar y actualizar productos en tiempo real  
+- **Arquitectura de Componentes:** Modular, separada por funcionalidades  
+- **Pruebas Fáciles:** Estructura lista para incluir test unitarios  
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Tecnologías
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+- **Framework:** React 19.1.1  
+- **Lenguaje:** TypeScript  
+- **Build Tool:** Vite  
+- **Estilos:** Styled Components (CSS-in-JS)  
+- **Gestión de Estado:** Context API  
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Instalación y Configuración
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Prerrequisitos
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **Node.js**: v20.18.1 o superior  
+- **npm**: v10.8.2 o superior (o yarn)
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Pasos
+
+1. Clonar el repositorio:
+   ```bash
+   git clone <repositorio>
+2. Moverse a la rama feature/proyecto-Integrador
+3. Instalar dependencias: npm install
+4. Iniciar el servidor de desarrollo: npm run dev
+### Usuarios de prueba
+ username: emilys
+ password: emilyspass
+### Arquitectura del Proyecto
+
+```plaintext
+src/
+├── components/           # Reusable UI components
+│   ├── Avatar/
+│   │   ├── Avatar.jsx
+│   │   └── Avatar.test.js
+│   ├── Button/
+│   │   ├── Button.jsx
+│   │   └── Button.test.js
+│   └── TextField/
+│       ├── TextField.jsx
+│       └── TextField.test.js
+├── contexts/            # React Context providers
+│   └── UserContext/
+│       └── UserContext.js
+├── hooks/              # Custom React hooks
+│   └── useMediaQuery/
+│       └── useMediaQuery.js
+├── pages/              # Application pages/screens
+│   ├── UserProfile/
+│   │   ├── components/     # Page-specific components
+│   │   │   └── SomeUserProfileComponent/
+│   │   │       ├── SomeUserProfileComponent.jsx
+│   │   │       └── SomeUserProfileComponent.test.js
+│   │   ├── UserProfile.jsx
+│   │   └── UserProfile.test.js
+│   └── index.js
+├── routes/             # Application routing
+│   ├── routes.jsx
+│   └── routes.test.js
+├── utils/              # Utility functions
+│   └── some-util/
+│       ├── index.js
+│       ├── someUtil.js
+│       └── index.test.js
+├── services/           # API services and external integrations
+│   └── some-service/
+│       ├── index.js
+│       ├── someService.js
+│       └── index.test.js
+├── App.jsx            # Main application component
+└── index.js           # Application entry point
+
